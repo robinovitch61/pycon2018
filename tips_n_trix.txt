@@ -1,0 +1,6 @@
+f'string{VARNAME}'
+
+__main__.py next to __init__.py makes packages executable from command line
+
+%load_ext line_profiler
+%lprun -f FUN FUN_CALL

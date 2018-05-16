@@ -1,0 +1,92 @@
+/#################/
+PyCon 2018 Summary
+Leo Robinovitch
+/#################/
+
+In general order of most --> least exciting:
+
+* All notes from talks, tutorials, sprints: https://github.com/robinovitch61/pycon2018
+
+* Videos from PyCon 2018: https://www.youtube.com/channel/UCsX05-2sVSH7Nx3zuk3NYuQ
+
+* Free Digital Books by Allen Downey -- Frequentis+Bayesian Stats, Digital Signal Processing, Complexity Science, etc., with python examples: http://greenteapress.com/wp/
+
+* Python library for digital signal processing: https://github.com/AllenDowney/ThinkDSP
+
+* Digital signal processing slides: https://docs.google.com/presentation/d/e/2PACX-1vSBDcuVO5-zRovw9wlegdSdEEuNG_fYxBtdKyMiqTskdTKJrbl6qcqj04gwWiVdHGlgVv1LBLd-uLW_/pub?slide=id.g1b100a4094_0_1
+
+* Complexity Science slides: https://docs.google.com/presentation/d/e/2PACX-1vRZe91r-yMDmvTm1r4bnNdaC1Ib8jHN4Y7c-_C86TmhyudEvmm4cyioUcT15nJtxDd_XCSli5qhiD1S/pub?slide=id.p
+
+* Gitannex, Datalab, Figshare
+
+* Docker slides: https://docs.google.com/presentation/d/11y8C-5u35_7--IUPuI4i4Xqiy-FUcR1GAERdJg692c8/edit#slide=id.g2ac1e6ff1d_0_0
+
+* Docker and docker-compose tutorial repo: https://github.com/docker-for-data-science/docker-for-data-science-tutorial
+
+* AsyncIO + Multiprocessing package made by facebook for high-performance python:
+  * https://github.com/jreese/aiomultiprocess
+  * https://www.youtube.com/watch?v=0kXaLh8Fz3k
+
+* Writing Code for Pre-Existing Code Bases:
+  * https://www.youtube.com/watch?v=LDdUuoI_lIg
+  
+* Non-Parametric Bayesian Modeling with PYMC3 -- non-linear data fitting with built in confidence bounds and regularization:
+  * https://www.youtube.com/watch?v=-sIOMs4MSuA
+  
+* Seven Ways to Optimize Numerical Python: https://www.youtube.com/watch?v=c5DV9Nur1W8
+
+* Debugging PySpark: https://www.youtube.com/watch?v=McgG09XriEI
+
+* numba
+
+* cookiecutter
+
+* Continuous integration tools: Travis-CI, Appveyor (Travis for Windows), Jenkins
+
+* virtual environments, version control and git collaboration: https://github.com/chalmerlowe/intro_to_sprinting/tree/master/class_materials
+
+* git branching model for development: http://nvie.com/posts/a-successful-git-branching-model/
+
+* open-sourcing things
+
+* recipy, nbval
+
+* pipenv
+
+
+
+* dask
+Spark: general data processing engine
+batch, stream processing, sql engine
+Hadoop yarn, ec2, mesos, local cluster
+Many languages
+Dask: parallel computing library for analytic computing
+Built on numpy, written in python, C and fortran
+Hadoop yarn, ec2, mesos, local cluster, kubernetes
+Python only
+Dask has exact same syntax as pandas!
+3-4x faster than spark on local machine, a little bit faster (1.2ish) on cluster
+Dask in reality:
+No java heap space
+No container killed by ARN
+Meaningful stack traces
+Visual feedback -- see what's taking the most time
+All python familiar if coming from pandas
+pip install dask, ready to run
+Bad:
+Limited support for complex parquets (objects in objects, not good for hierarchies)
+Required workaround for writing to json
+Doesn't support as many agg functions
+More bugs, less docs
+Cluster deployments are WIP
+In flux
+Doesn't support sql
+
+
+
+* xarray -- pandas in multiple dimensions
+
+* reproducible workflows: http://bitsandchips.me/Talks/PyCon.html
+  * the "Bus Factor" -- how many people getting hit by busses would it take for this project to be stopped?
+  
+
