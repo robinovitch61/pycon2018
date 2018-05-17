@@ -4,68 +4,70 @@ Leo Robinovitch
 /#################/
 
 __________________________________________________
-___ All notes from talks, tutorials, sprints:  ___
+___  All notes from talks, tutorials, sprints:  __
 
 *** https://github.com/robinovitch61/pycon2018 ***
 __________________________________________________
 
 
-...........................
 
 __________________________________________________________________
-_____________________ Videos from PyCon2018  _____________________
+__________________ All Videos from PyCon2018  ____________________
 
 *** https://www.youtube.com/channel/UCsX05-2sVSH7Nx3zuk3NYuQ ***
 __________________________________________________________________
 
-
-...........................
 
 
 ----------------------------------------------------------------------
 Tools worth checking out, in general order of most --> least exciting:
 ----------------------------------------------------------------------
 
-** dask **: a really exciting replacement for pyspark
+** dask **: an exciting replacement option for pyspark (batch jobs)
   * Demo: https://www.youtube.com/watch?v=N_GqzcuGLCY
   * PyCon2018 Talk: https://www.youtube.com/watch?v=Iq72dt1gO9c
   - Features:
     - Pandas syntax (dask dataframes)
     - Built on numpy, written in python, C, and Fortran
     - No Java required (unlike pyspark)
-    - Less errors as well as comprehensible errors and stacktraces (no vague memory errors, "Container Killed by YARN"...)
+    - Less errors as well as comprehensible stacktraces (no vague memory errors, "Container Killed by YARN"...)
     - Benchmarked at 400% faster locally, 20% faster on cluster for same jobs relative to pyspark
     - Useful diagnostics and visual feedback during runtime -- trace each process and see where time is spent
   - Drawbacks:
-    - In rapid development (not yet stable)
+    - In rapid development (not yet super stable)
     - Limited support for complex parquets (nested hierarchies)
     - Currently recommended for Kubernetes-managed clusters, but hadoop yarn interface tools coming out this month
 
-** pipenv **: the future requirements.txt
+
+** pipenv **: replacing requirements.txt
   * PyCon2018 Talk: https://www.youtube.com/watch?v=GBQAKldqgZs
   - Features:
     - It's pip, but builds a Pipfile upon each install in the project directory that tracks your environment as you build it up.
-    - Upon build of virtual environment, creates lock file that contains all the details (sub-dependancies, git hashes, etc.)
-    - Will eventually be incorporated into pip and replace virtualenv and provide alternative to conda envs (currently functional but called pipenv and not yet pip)
+    - Upon build of virtual environment, creates lock file that contains all the details (sub-dependancies, detailed versions, etc.)
+    - Will eventually be incorporated into pip and replace virtualenv, alternative to conda envs
+    - Currently functional but called pipenv and currently separate from pip
     
 
-** Continuous integration tools: Travis-CI, Appveyor (Travis for Windows), Jenkins **: automates tests upon push to version control (or on commit locally)
-  - Do we have this already at Tesla? I am excited to use CI tools for my projects.
+** Continuous integration tools **: automates tests upon commit and/or push to version control
+  - E.g. Travis-CI, Appveyor (Travis for Windows), Jenkins
+  - Do we have this already at Tesla? I am excited to use CI tools for my team's projects.
 
 
-** Gitannex and Datalab **: methods of versioning files too large to actually check-in to version control
-git-annex:
-  - built on git, manage files with git without actually checking the files in
-  - add special remotes, other fancy features
-Datalad:
-  - relies on git and git-annex, organizes repos into super-datasets
-  - aggs metadata (searchable)
-  - python api -- import symbolic links to data from github
-
+** git-annex and datalab **: methods of versioning files too large to actually check-in to version control
+  * git-annex:
+    - built on git, manage files with git without actually checking the files in
+    - add special remotes, other fancy features
+  * datalad:
+    - relies on git and git-annex, organizes repos into super-datasets
+    - aggs metadata (searchable)
+    - python api -- import symbolic links to data from github
+  
+  
 ** AsyncIO + Multiprocessing **: package made by facebook for high-performance python
   * Package Repo: https://github.com/jreese/aiomultiprocess
   * PyCon2018 Talk: https://www.youtube.com/watch?v=0kXaLh8Fz3k
-  - Seems advanced and use-case specific, but sample code performance increased by 500% with this package
+  - Seems advanced and use-case specific, but sample code performance increased by ~500% with this package
+
 
 ** PYMC3 **: Bayesian models made easy in Python
   * PyCon2018 Talk: https://www.youtube.com/watch?v=-sIOMs4MSuA
@@ -73,8 +75,87 @@ Datalad:
   * Blog Post on Gaussian Parameter Fitting: https://sidravi1.github.io/blog/2018/05/15/latent-gp-and-binomial-likelihood
   * Bayesian Stats for Hackers uses PYMC3: https://github.com/CamDavidsonPilon/Probabilistic-Programming-and-Bayesian-Methods-for-Hackers
   
+
+** Kubernetes **: "a system you run on a cluster that allows many distributed systems to run on that cluster"
+  * Link: https://kubernetes.io/
+  * Good Explanation: https://www.redhat.com/en/topics/containers/what-is-kubernetes
+  - Alternative to hadoop yarn as a cluster management tool
+  - Can manage jupyterhub and dask, see Matthew Rocklin's Dask talk here: https://www.youtube.com/watch?v=Iq72dt1gO9c
+
+
+** XND **: an extremely early project that attempts to re-write numpy to include more features
+  * Github Repo: https://github.com/plures/xnd
+  * Link: https://xnd.io/
+  - More data types (categorical, missing, self-defined)
+  - Ragged arrays
+  - More modularity and better organization than numpy -- easier to improve and build upon
+  - Eventually will seamlessly swap-out the numpy backend
+
+
+** recipy **: effortlessly record details of a given analysis
+  * Github Repo: https://github.com/recipy/recipy
+  - Just put "import recipy" at the top of your script, then use commands like "recipy latest" to see all run details
+  - Records every time you ran a script -- what input data, packages, versions, etc. was used
+
+
+** nbval **: treat every cell in your jupyter notebook like a test
+  * Github Repo: https://github.com/computationalmodelling/nbval
+  - Runs pytest-like comparison of previous cell outputs to current cell outputs
+
+
+** numba **: massively speed up performance with a single decorator
+  * Link: https://numba.pydata.org/
+  - Supported by Anaconda
+  - Just-In-Time compiles code to native machine instructions using LLVM compiler
+  - Provides similar performance to C/C++/Fortran
+  - Some dependencies, best for numerical computation oriented projects
   
+
+** cookiecutter **: auto-generate boilerplate python package files+directories
+  * Github Link: https://github.com/audreyr/cookiecutter
+  - Make your own template or choose from a pre-existing set
+  - Super easy to use
+
+
+** various monitoring/dashboarding tools **:
+  * Prometheus (time series data): https://prometheus.io/
+  * Grafana (time series data): https://grafana.com/
+  * Dash by Plotly: https://plot.ly/products/dash/
+  * Nagios: https://www.nagios.org/
   
+
+** type annotations **: assert variable types in python
+  * Link: https://www.python.org/dev/peps/pep-0484/
+  - Paired with tools like mypy
+  - Another way to catch errors early
+  - Not a lot of love for it at PyCon
+
+
+** glom **: nested data operator for python
+  * Github Link: https://github.com/mahmoud/glom
+  * Docs: https://glom.readthedocs.io/en/latest/tutorial.html
+  - Provides MatLab struct-like syntax for nested data structures
+  - Provides more descriptive errors when attempting to access nested data
+
+
+** xarray **: pandas in multiple dimensions
+  * Link: https://xarray.pydata.org/en/stable/
+  - Labeled, N-D arrays
+  - Contains pandas-like operators (slicing, groupbys, min/max etc.)
+  - Ensure all your operations are fast (vectorized) -- extends numpy
+
+
+** p5 **: javascript-esque animations in python
+  * Github Link: https://github.com/p5py/p5
+  - Quite early development
+  - Based off other package, Processing
+  
+
+** AREPL **: python scratchpad with real-time code evaluation
+  * Github Link: https://github.com/Almenon/AREPL
+  - Good for learning, basic checks in real-time
+
+
 ----------------------------------------------------------------------
 Tutorials and Resources Worth Checking Out:
 ----------------------------------------------------------------------
@@ -91,62 +172,21 @@ Tutorials and Resources Worth Checking Out:
 
 * Docker slides: https://docs.google.com/presentation/d/11y8C-5u35_7--IUPuI4i4Xqiy-FUcR1GAERdJg692c8/edit#slide=id.g2ac1e6ff1d_0_0
 
+* The BEST intro to version control and virtual environments: https://github.com/chalmerlowe/intro_to_sprinting/tree/master/class_materials
 
+* Slides on creating Reproducible Workflows: http://bitsandchips.me/Talks/PyCon.html
+  * Raise your "Bus Factor" -- how many people getting hit by a bus would it take for your project to be stopped?
+
+* Git branching model for development: http://nvie.com/posts/a-successful-git-branching-model/
+  - Worth checking out just to understand --no-ff option in git merge
+  
 ----------------------------------------------------------------------
 Stand-Alone Talks Worth Checking Out:
 ----------------------------------------------------------------------
 
-* Writing Code for Pre-Existing Code Bases:
-  * https://www.youtube.com/watch?v=LDdUuoI_lIg
+* Writing Code for Pre-Existing Code Bases: https://www.youtube.com/watch?v=LDdUuoI_lIg
   
 * Seven Ways to Optimize Numerical Python: https://www.youtube.com/watch?v=c5DV9Nur1W8
 
 * Debugging PySpark: https://www.youtube.com/watch?v=McgG09XriEI
   - Note: spark 2.2+ has more useful error info passed to jupyter notebooks
-
-
-
-
-
-
-
-
-* Kubernetes: "a system you run on a cluster that allows many distributed systems to run on that cluster"
-  * Can manage jupyterhub and dask, see Matthew Rocklin's Dask talk
-
-* Glom: nested data operator for python
-
-* Tools for monitoring: prometheus for time series, grafana, nagios
-
-* numba
-
-* cookiecutter
-
-
-* virtual environments, version control and git collaboration: https://github.com/chalmerlowe/intro_to_sprinting/tree/master/class_materials
-
-* git branching model for development: http://nvie.com/posts/a-successful-git-branching-model/
-
-* open-sourcing things
-
-* Surprise library for singular value decomposition, recommender algorithms
-
-* XND: not too useful right now, but future implementation of numpy (supports more types, ragged arrays, more modular)
-
-* recipy, nbval
-
-
-
-* Type annotations: https://www.python.org/dev/peps/pep-0484/
-  * mypy
-  
-* Animations in python: p5
-
-* AREPL, tool for real-time code evaluation: https://github.com/Almenon/AREPL
-
-* xarray -- pandas in multiple dimensions
-
-* reproducible workflows: http://bitsandchips.me/Talks/PyCon.html
-  * the "Bus Factor" -- how many people getting hit by busses would it take for this project to be stopped?
-  
-
